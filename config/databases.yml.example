@@ -1,0 +1,11 @@
+all:
+  propel:
+    class: sfPropelDatabase
+    param:
+      classname: PropelPDO
+      dsn: mysql:dbname=##DATABASE NAME##;host=localhost
+      username: ##YOUR USERNAME##
+      password: ##YOUR PASSWORD##
+      encoding: utf8
+      persistent: true
+      pooling: true

@@ -1,0 +1,4 @@
+.idea
+symfony
+lib/vendor/symfony
+config/databases.yml

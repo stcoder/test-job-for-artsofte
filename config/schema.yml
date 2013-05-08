@@ -1,0 +1,5 @@
+propel:
+  books:
+    id: ~
+    title: {type: varchar(200)}
+    description: {type: longvarchar}
