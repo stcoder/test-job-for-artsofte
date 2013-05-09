@@ -22,7 +22,7 @@ $(function() {
     link.on('click', function() {
         var $this = $(this);
         var offset = table.find('.line').length;
-        var link = $this.attr('href') + '?offset=' + (offset + 22);
+        var link = $this.attr('href') + '?offset=' + offset;
         $this.hide();
         preloader.show();
         $.getJSON(link, function(response) {
