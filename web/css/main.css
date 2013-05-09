@@ -74,3 +74,7 @@
     display: inline-block;
     background: url(/images/preloader.gif);
 }
+
+.info-muted-block {
+    color: #999;
+}

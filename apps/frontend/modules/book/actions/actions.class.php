@@ -9,10 +9,15 @@
  */
 class bookActions extends sfActions
 {
+    /**
+     * @var int
+     */
+    private $_limit = 10;
+
     public function executeIndex(sfWebRequest $request)
     {
         $books = BooksQuery::create();
-        $books->setLimit(10);
+        $books->setLimit($this->_limit);
         $this->Bookss = $books->find();
     }
 
@@ -20,13 +25,20 @@ class bookActions extends sfActions
     {
         $this->forward404Unless($request->isXmlHttpRequest());
         $books = BooksQuery::create();
+        $count = $books->count();
         $offset = $request->getParameter('offset', null);
-        if ($offset === null) {
+        if (null === $offset) {
             throw new HttpInvalidParamException('Parameter "offset" is not set');
         }
         $books->setOffset($offset);
-        $books->limit(10);
-        return $this->renderPartial('books-list', array('Bookss' => $books->find()));
+        $books->limit($this->_limit);
+        $this->getResponse()->setContentType('application/json');
+        $dataArray = array(
+            'books_list' => $this->getPartial('books-list', array('Bookss' => $books->find())),
+            'is_last' => ($offset + $this->_limit) >= $count
+        );
+        $dataJson = json_encode($dataArray);
+        return $this->renderText($dataJson);
     }
 
     public function executeNew(sfWebRequest $request)

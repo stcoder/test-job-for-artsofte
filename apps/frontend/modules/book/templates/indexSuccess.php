@@ -13,6 +13,7 @@
 <div class="button-getBooks-wrap">
     <a href="<?php echo url_for('book/getAjaxBooks') ?>">Показать еще</a>
     <div class="preloader" style="display: none;"></div>
+    <div class="info-muted-block" style="display: none;">Книг больше нет.</div>
 </div>
 <div id="dialog-modal" title="undefined" style="display: none;"></div>
 <script>
@@ -37,10 +38,16 @@
             var link = $(this).attr('href') + '?offset=' + offset;
             self.hide();
             self.parent().children('.preloader').show();
-            $.get(link, function(response) {
-                table.children('tbody').append(response);
-                self.show();
-                self.parent().children('.preloader').hide();
+            $.getJSON(link, function(response) {
+                table.children('tbody').append(response.books_list);
+                if (response.is_last) {
+                    self.hide();
+                    self.parent().children('.preloader').hide();
+                    self.parent().children('.info-muted-block').show();
+                } else {
+                    self.show();
+                    self.parent().children('.preloader').hide();
+                }
             });
             return false;
         });
