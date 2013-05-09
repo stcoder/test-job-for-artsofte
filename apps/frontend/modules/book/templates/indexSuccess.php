@@ -1,4 +1,6 @@
-<a href="<?php echo url_for('book/new') ?>">New</a>
+<div class="menu-bar">
+    <a href="<?php echo url_for('book/new') ?>">Добавить новую книгу</a>
+</div>
 <table class="books-list">
     <thead>
     <tr>
