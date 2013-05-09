@@ -10,7 +10,10 @@
         <?php echo get_partial('books-list', array('Bookss' => $Bookss)) ?>
     </tbody>
 </table>
-<div class="button-getBooks-wrap"><a href="<?php echo url_for('book/getAjaxBooks') ?>">Показать еще</a></div>
+<div class="button-getBooks-wrap">
+    <a href="<?php echo url_for('book/getAjaxBooks') ?>">Показать еще</a>
+    <div class="preloader" style="display: none;"></div>
+</div>
 <div id="dialog-modal" title="undefined" style="display: none;"></div>
 <script>
     $(function() {
@@ -28,11 +31,16 @@
             });
         });
 
-        buttonGetBooks.children().on('click', function() {
+        buttonGetBooks.children('a').on('click', function() {
+            var self = $(this);
             var offset = table.find('.line').length;
             var link = $(this).attr('href') + '?offset=' + offset;
+            self.hide();
+            self.parent().children('.preloader').show();
             $.get(link, function(response) {
                 table.children('tbody').append(response);
+                self.show();
+                self.parent().children('.preloader').hide();
             });
             return false;
         });

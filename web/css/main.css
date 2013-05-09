@@ -67,3 +67,10 @@
     padding: 10px 8px;
     text-align: center;
 }
+
+.preloader {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background: url(/images/preloader.gif);
+}
