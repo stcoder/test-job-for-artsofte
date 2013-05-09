@@ -26,10 +26,11 @@ class bookActions extends sfActions
         $this->forward404Unless($request->isXmlHttpRequest());
         $books = BooksQuery::create();
         $count = $books->count();
-        $offset = $request->getParameter('offset', null);
-        if (null === $offset) {
-            throw new HttpInvalidParamException('Parameter "offset" is not set');
-        }
+        $intValidator = new sfValidatorInteger(array(
+            'min' => 0,
+            'max' => $count
+        ));
+        $offset = $intValidator->clean($request->getParameter('offset', null));
         $books->setOffset($offset);
         $books->limit($this->_limit);
         $this->getResponse()->setContentType('application/json');

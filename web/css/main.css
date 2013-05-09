@@ -78,3 +78,7 @@
 .info-muted-block {
     color: #999;
 }
+
+.info-error-block {
+    color: #BE0000;
+}
