@@ -1,22 +1,40 @@
-<h1>Bookss List</h1>
 <a href="<?php echo url_for('book/new') ?>">New</a>
-<table>
-  <thead>
+<table class="books-list">
+    <thead>
     <tr>
-      <th>Id</th>
-      <th>Title</th>
-      <th>Description</th>
+        <th>№ п/п</th>
+        <th>Название</th>
     </tr>
-  </thead>
-  <tbody>
-    <?php foreach ($Bookss as $Books): ?>
-    <tr>
-      <td><a href="<?php echo url_for('book/edit?id='.$Books->getId()) ?>"><?php echo $Books->getId() ?></a></td>
-      <td><?php echo $Books->getTitle() ?></td>
-      <td><?php echo $Books->getDescription() ?></td>
-    </tr>
-    <?php endforeach; ?>
-  </tbody>
+    </thead>
+    <tbody>
+        <?php echo get_partial('books-list', array('Bookss' => $Bookss)) ?>
+    </tbody>
 </table>
+<div class="button-getBooks-wrap"><a href="<?php echo url_for('book/getAjaxBooks') ?>">Показать еще</a></div>
+<div id="dialog-modal" title="undefined" style="display: none;"></div>
+<script>
+    $(function() {
+        var buttonGetBooks = $('.button-getBooks-wrap');
+        var table = $('.books-list');
+        var dialogModal = $('#dialog-modal');
+        table.on('click', '.line', function() {
+            var description = $(this).data('description');
+            var title = $(this).find('td:last-child').text();
+            dialogModal.html(description);
+            dialogModal.dialog({
+                width: 512,
+                modal: true,
+                title: title
+            });
+        });
 
-  <a href="<?php echo url_for('book/new') ?>">New</a>
+        buttonGetBooks.children().on('click', function() {
+            var offset = table.find('.line').length;
+            var link = $(this).attr('href') + '?offset=' + offset;
+            $.get(link, function(response) {
+                table.children('tbody').append(response);
+            });
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,69 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    outline: none;
+    font-family: Tahoma;
+    font-size: 13px;
+}
+
+.container {
+    width: 755px;
+    margin: 0 auto;
+    border: solid #D9E0E7;
+    border-width: 0px 1px 1px;
+}
+
+.header {
+    padding: 20px 10px 20px 40px;
+    background: #edf1f5;
+    -webkit-box-shadow: inset 0 -4px 2px -2px rgba(0,0,0,0.03);
+    -moz-box-shadow: inset 0 -4px 2px -2px rgba(0,0,0,0.03);
+    box-shadow: inset 0 -4px 2px -2px rgba(0,0,0,0.03);
+}
+
+.content {
+    padding: 20px;
+}
+
+.header h1 {
+    color: #5C7B9B;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.books-list {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.books-list thead th {
+    background: #edf1f5;
+    padding: 10px 0;
+}
+
+.books-list tbody tr td:first-child {
+    width: 100px;
+    text-align: center;
+    color: #000;
+}
+
+.books-list tbody td {
+    padding: 8px 0;
+    border-bottom: 1px solid #D9E0E7;
+}
+
+.books-list tbody tr {
+    cursor: pointer;
+    transition: all 0.15s;
+    -moz-transition: all 0.15s;
+    -webkit-transition: all 0.15s;
+}
+
+.books-list tbody tr:hover {
+    background: #e5ded2;
+}
+
+.button-getBooks-wrap {
+    padding: 10px 8px;
+    text-align: center;
+}
